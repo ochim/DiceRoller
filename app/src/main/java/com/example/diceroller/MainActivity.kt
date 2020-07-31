@@ -9,18 +9,22 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val diceImageView1 = findViewById<ImageView>(R.id.imageView)
+        val diceImageView2 = findViewById<ImageView>(R.id.imageView2)
 
         val rollButton: Button = findViewById(R.id.button)
-        rollButton.setOnClickListener { rollDice() }
+        rollButton.setOnClickListener {
+            rollDice(diceImageView1)
+            rollDice(diceImageView2)
+        }
 
         // Do a dice roll when the app starts
-        rollDice()
+        rollDice(diceImageView1)
+        rollDice(diceImageView2)
     }
 
-    private fun rollDice() {
-        val dice = Dice(6)
-        val diceRoll = dice.roll()
-        val diceImageView = findViewById<ImageView>(R.id.imageView)
+    private fun rollDice(diceImageView: ImageView) {
+        val diceRoll = Dice(6).roll()
 
         val drawableResouce = when (diceRoll) {
             1 -> R.drawable.dice_1
